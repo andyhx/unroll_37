@@ -1,0 +1,39 @@
+name:"weight"
+input: "gt_theta"
+input_dim:1
+input_dim:1
+input_dim:1
+input_dim:236
+input: "pid"
+input_dim:1
+input_dim:1
+input_dim:1
+input_dim:199
+input: "pexp"
+input_dim:1
+input_dim:1
+input_dim:1
+input_dim:29
+input: "pm"
+input_dim:1
+input_dim:1
+input_dim:1
+input_dim:8
+layer {
+  name: "loss"
+  type: "Weight_pm"
+  bottom: "gt_theta"
+  bottom: "pid"
+  bottom: "pexp"
+  bottom: "pm"
+  top: "loss"
+  weight_pm_param {
+    mean_shape: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_shape.txt"
+    shape_basis: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
+    mean_exp: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_exp.txt"
+    exp_basis: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/exp_basis.txt"
+    para_std: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
+    para_mean: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
+    vertices_num:159645
+  }
+}

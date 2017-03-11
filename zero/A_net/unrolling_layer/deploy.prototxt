@@ -1,0 +1,49 @@
+name: "unrolling_layer"
+input: "image"
+input_dim: 1
+input_dim: 1
+input_dim: 250
+input_dim: 250
+input: "p199"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 199
+input: "p29"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 29
+input: "p8"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 8
+layer {
+  name: "unrolling"
+  type: "Unrolling"
+  bottom: "image"
+  bottom: "p199"
+  bottom: "p29"
+  bottom: "p8"
+  top: "unrolling"
+  propagate_down : 0
+  propagate_down : 1
+  propagate_down : 1
+  propagate_down : 1
+  unrolling_param {
+    isomap_h: 128
+    isomap_w: 128
+    mean_shape: "zero/test_unrolling_layer/Model_txt/mean_shape.txt"
+    shape_basis: "zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
+    mean_exp: "zero/test_unrolling_layer/Model_txt/mean_exp.txt"
+    exp_basis: "zero/test_unrolling_layer/Model_txt/exp_basis.txt"
+    para_std: "zero/test_unrolling_layer/Model_txt/para_std.txt"
+    para_mean: "zero/test_unrolling_layer/Model_txt/para_mean.txt"
+    tvi: "zero/test_unrolling_layer/Model_txt/tvi.txt"
+    texcoord: "zero/test_unrolling_layer/Model_txt/texcoord.txt"
+    vertices_num:159645
+    is_gray:true 
+    has_processed:true
+  }
+} 

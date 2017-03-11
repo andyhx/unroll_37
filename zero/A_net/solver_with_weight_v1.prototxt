@@ -1,0 +1,27 @@
+# The train/test net protocol buffer definition
+net: "zero/a_net/a_net_with_weight.prototxt"
+#test_iter: 100
+
+# Carry out testing every 1000 training iterations.
+# test_interval: 10000000
+
+# The base learning rate, momentum and the weight decay of the network.
+base_lr: 0.00005
+momentum: 0.9
+weight_decay: 0.005
+lr_policy: "inv"
+gamma: 0.0001
+power: 0.5
+
+# Display every 100 iterations
+display: 200
+
+# The maximum number of iterations
+max_iter: 15000000
+
+# snapshot intermediate results
+snapshot: 200
+snapshot_prefix: "zero/a_net/snapshot_with_weight_v1/a_net"
+
+# solver mode: CPU or GPU
+# solver_mode: GPU
