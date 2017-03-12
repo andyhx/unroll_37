@@ -1,4 +1,4 @@
-function draw_roc(rootdir,test_list,net)
+function draw_roc(rootdir,test_list,net,interval)
 % rootdir = '/home/scw4750/github/r_net/one_dir/';
 
 countgallery = 0;
@@ -62,5 +62,5 @@ roc = evaluation.evaluate('roc', scores, labels);
 fprintf('eer:          %f\n', roc.measure);
 fprintf('tpr001:       %f\n', roc.extra.tpr001*100);
 fprintf('tpr0001:      %f\n', roc.extra.tpr0001*100);
-ROC(scores,labels,10); 
+ROC(scores,labels,interval); 
 end

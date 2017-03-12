@@ -1,4 +1,6 @@
-filename = '/home/scw4750/github/unrolling/log.txt';
+
+function plot_loss(filename,begin_num)
+filename = '/home/scw4750/github/unrolling/zero/Lightencnn/lfw_fine_tuning/log/log.txt';
 fid=fopen(filename,'r');
 regpat = 'Iteration [0-9]+, loss = [0-9\.]+';
 iter = zeros(100000,1);
@@ -15,6 +17,6 @@ while ~feof(fid)
     end;
 end;
 fclose(fid);
-iter = iter(100:p-1);
-loss = loss(100:p-1);
+iter = iter(begin_num:p-1);
+loss = loss(begin_num:p-1);
 plot(iter,loss);
