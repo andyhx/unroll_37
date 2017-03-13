@@ -32,12 +32,12 @@ caffe.set_device(0)
 from google.protobuf import text_format
 from caffe.proto import caffe_pb2
 
-solver=caffe.SGDSolver('zero/A_Rnet/solver_freeze_r.prototxt')
+solver=caffe.SGDSolver('/home/scw4750/zero/A_Rnet/A_Rnet_freeze_r/solver_freeze_r.prototxt')
 #solver.restore('zero/A_Rnet/snapshot_freeze_r/a_rnet_iter_1400.solverstate');
 #solver.net.copy_from('zero/a_net/base1_iter_40000.caffemodel')
 #solver.net.copy_from('/home/brl/github/unrolling/zero/a_net/snapshot_with_weight_v1/a_net_iter_800.caffemodel')
 #solver.net.copy_from('zero/A_Rnet/R_net.caffemodel')
-solver.net.copy_from('zero/A_Rnet/snapshot_freeze_a/a_rnet_iter_28400.caffemodel')
+solver.net.copy_from('/home/scw4750/zero/A_Rnet/A_Rnet_freeze_a/snapshot_freeze_a/a_rnet_iter_28400.caffemodel')
 import cv2
 from cv2 import cv
 import os
