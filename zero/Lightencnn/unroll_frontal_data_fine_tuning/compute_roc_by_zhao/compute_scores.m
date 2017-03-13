@@ -17,18 +17,28 @@ train_list='/home/scw4750/github/r_net/test/train_list.txt';
 legend_name={};
 
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
+% weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/centerloss_data_augment/rnet__iter_310000.caffemodel';
 net=caffe.Net(cnnModel,weights,'test');
 
 %best result for test_list 
 draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10);
-legend_name={legend_name{:},'our-model-best-result'};
+legend_name={legend_name{:},'ours-tuning'};
 
-% best result for train_list
-draw_roc('/home/scw4750/github/r_net/one_dir/',train_list,net,100);
-legend_name={legend_name{:},'our-model-best-result-with-train-list'};
+% % weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
+% weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/centerloss_data_augment/rnet__iter_310000.caffemodel';
+% net=caffe.Net(cnnModel,weights,'test');
+% 
+% %best result for 
+% draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10);
+% legend_name={legend_name{:},'ours-tuning-augment'};
 
-legend(legend_name);
-return;
+
+% % best result for train_list
+% draw_roc('/home/scw4750/github/r_net/one_dir/',train_list,net,1000);
+% legend_name={legend_name{:},'our-model-best-result-with-train-list'};
+
+% legend(legend_name);
+% return;
 
 % %for fune tuning crop frontal
 % weights='/home/scw4750/github/unrolling/zero/Lightencnn/snapshot/crop_frontal/rnet__iter_16000.caffemodel';
@@ -39,32 +49,43 @@ return;
 
 %for fune tuning frontal
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/frontal/rnet__iter_20000.caffemodel';
-net2=caffe.Net(cnnModel,weights,'test');
-draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',test_list,net2,100);
-legend_name={legend_name{:},'tuning-frontal-iter-20000'};
+net=caffe.Net(cnnModel,weights,'test');
+draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',test_list,net,10);
+legend_name={legend_name{:},'frontal-tuning'};
+
 % 
 % legend(legend_name);
 % return;
 
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/final_LightenedCNN_C.caffemodel';
-net2=caffe.Net(cnnModel,weights,'test');
+net=caffe.Net(cnnModel,weights,'test');
 
 % %for our data without fine-tuning model
-% draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net2,100);
+% draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,100);
 % legend_name={legend_name{:},'unroll-without-fine-tuning'};
 
-%for crop_frontal
-
-draw_roc('/home/scw4750/github/ori_frontal/crop_one_dir/',test_list,net2,100);
-legend_name={legend_name{:},'crop-frontal'};
-
-%for frontal
-draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',test_list,net2,100);
-legend_name={legend_name{:},'frontal'};
+% %for crop_frontal
+% 
+% draw_roc('/home/scw4750/github/ori_frontal/crop_one_dir/',test_list,net,100);
+% legend_name={legend_name{:},'crop-frontal'};
 
 %for origin
-draw_roc('/home/scw4750/github/ori_frontal/ori_img/one_dir/',test_list,net2,100);
+draw_roc('/home/scw4750/github/ori_frontal/ori_img/one_dir/',test_list,net,10);
 legend_name={legend_name{:},'original'};
+
+
+
+%for ours
+draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10);
+legend_name={legend_name{:},'ours'};
+
+
+
+%for frontal
+draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',test_list,net,10);
+legend_name={legend_name{:},'frontal'};
+
+
 
 % %to find best result
 % weights='/home/scw4750/github/unrolling/zero/Lightencnn/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_7000.caffemodel';

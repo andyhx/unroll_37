@@ -1082,7 +1082,7 @@ namespace caffe {
                     //cv::Mat lined_image=image.clone();
 
 
-                    std::string output_dir="/home/scw4750/github/unrolling/zero/test_backward/200caffemodel";
+                    std::string output_dir="/home/scw4750/github/unrolling/zero/A_net/temp_result";
                     count_num++;
                     cv::Mat lined_image=image.clone();
                     for (const auto& triangle_indices : mesh.tvi){

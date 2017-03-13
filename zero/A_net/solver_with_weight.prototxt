@@ -1,5 +1,5 @@
 # The train/test net protocol buffer definition
-net: "zero/a_net/a_net_with_weight.prototxt"
+net: "/home/scw4750/github/unrolling/zero/A_net/a_net_with_weight.prototxt"
 #test_iter: 100
 
 # Carry out testing every 1000 training iterations.
@@ -21,7 +21,7 @@ max_iter: 15000000
 
 # snapshot intermediate results
 snapshot: 200
-snapshot_prefix: "zero/a_net/snapshot_with_weight/a_net"
+snapshot_prefix: "/home/scw4750/github/unrolling/zero/A_net/snapshot_with_weight/snapshot_with_weight_origin/a_net"
 
 # solver mode: CPU or GPU
 # solver_mode: GPU

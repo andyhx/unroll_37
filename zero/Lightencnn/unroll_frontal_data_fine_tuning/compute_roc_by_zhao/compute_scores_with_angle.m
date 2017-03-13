@@ -22,48 +22,69 @@ legend_name={};
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
 net=caffe.Net(cnnModel,weights,'test');
 
-% %for 0-30
-% draw_roc('/home/scw4750/github/r_net/one_dir/',list,net,10);
-% legend_name={legend_name{:},'0-30'};
-% % 
+%for 0-30
+draw_roc('/home/scw4750/github/r_net/one_dir/',list,net,10);
+legend_name={legend_name{:},'ours-tuing-0-30'};
+% 
 % for 30-60
 % draw_roc('/home/scw4750/github/r_net/one_dir/',list1,net,10);
-% legend_name={legend_name{:},'30-60'};
+% legend_name={legend_name{:},'ours-tuing-30-60'};
 
 % %for 60-90
-draw_roc('/home/scw4750/github/r_net/one_dir/',list2,net,10);
-legend_name={legend_name{:},'60-90'};
+% draw_roc('/home/scw4750/github/r_net/one_dir/',list2,net,10);
+% legend_name={legend_name{:},'ours-tuing-60-90'};
 
 
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/final_LightenedCNN_C.caffemodel';
-net2=caffe.Net(cnnModel,weights,'test');
+net=caffe.Net(cnnModel,weights,'test');
 
 %for frontal 0-30
-% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list,net2,10);
+% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list,net,10);
 % legend_name={legend_name{:},'frontal 0-30'};
 % 
 % %for frontal 30-60
-% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list1,net2,10);
+% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list1,net,10);
 % legend_name={legend_name{:},'frontal 30-60'};
 
-%for frontal 60-90
-draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list2,net2,10);
-legend_name={legend_name{:},'frontal 60-90'};
+% %for frontal 60-90
+% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list2,net,10);
+% legend_name={legend_name{:},'frontal 60-90'};
+
+
+
+
+% %for original 0-30
+draw_roc('/home/scw4750/github/r_net/one_dir/',list,net,10);
+legend_name={legend_name{:},'0-30'};
+% % 
+% for original 30-60
+% draw_roc('/home/scw4750/github/r_net/one_dir/',list1,net,10);
+% legend_name={legend_name{:},'30-60'};
+
+% % %for original 60-90
+% draw_roc('/home/scw4750/github/r_net/one_dir/',list2,net,10);
+% legend_name={legend_name{:},'original-60-90'};
+
+
+
+
 
 weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/frontal/rnet__iter_20000.caffemodel';
-net2=caffe.Net(cnnModel,weights,'test');
+net=caffe.Net(cnnModel,weights,'test');
 
 %for fune tuning frontal 0-30
-% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list,net2,10);
-% legend_name={legend_name{:},'tuning-frontal-0-30'};
+draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list,net,10);
+legend_name={legend_name{:},'frontal-tuning-0-30'};
 
-%for fune tuning frontal 30-60
-% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list1,net2,10);
-% legend_name={legend_name{:},'tuning-frontal-30-60'};
+% for fune tuning frontal 30-60
+% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list1,net,10);
+% legend_name={legend_name{:},'frontal-tuning-30-60'};
 
 %for fune tuning frontal
-draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list2,net2,10);
-legend_name={legend_name{:},'tuning-frontal-60-90'};
+% draw_roc('/home/scw4750/github/ori_frontal/frontal_img/one_dir/',list2,net,10);
+% legend_name={legend_name{:},'frontal-tuning-60-90'};
+
+
 
 legend(legend_name);
 return;

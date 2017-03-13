@@ -32,15 +32,15 @@ from google.protobuf import text_format
 from caffe.proto import caffe_pb2
 
 caffe.set_mode_gpu()
-solver=caffe.SGDSolver('zero/a_net/solver_with_weight.prototxt')
+solver=caffe.SGDSolver('/home/scw4750/github/unrolling/zero/A_net/solver_with_weight.prototxt')
 #solver.restore('zero/a_net/snapshot_with_weight/a_net_iter_280.solverstate')
-solver.net.copy_from('zero/a_net/base1_iter_40000.caffemodel')
+solver.net.copy_from('/home/scw4750/github/unrolling/zero/A_net/base1_iter_40000.caffemodel')
 use_mat=True
 if use_mat==True:
     import cv2
     from cv2 import cv
     import h5py
-    matfn='/home/brl/data/a_net/shuffle_data_v2.mat'
+    matfn='/home/scw4750/github/a_net/shuffle_data_2.mat'
     f=h5py.File(matfn)
     img_data=f['new_data']['img']
     para_data=f['new_data']['para']
