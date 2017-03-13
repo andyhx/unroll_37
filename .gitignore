@@ -71,7 +71,7 @@ zero/A_net/unrolling_layer/test_img/lfw/lfw.tgz
 ## Caffe
 
 # User's build configuration
-Makefile.config
+#Makefile.config
 
 # Data and models are either
 # 1. reference, and not casually committed

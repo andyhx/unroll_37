@@ -12,18 +12,32 @@ else
     caffe.set_mode_cpu();
 end
 
+
 test_list='/home/scw4750/github/r_net/test/test_list.txt';
 train_list='/home/scw4750/github/r_net/test/train_list.txt';
 legend_name={};
 
-weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
-% weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/centerloss_data_augment/rnet__iter_310000.caffemodel';
-net=caffe.Net(cnnModel,weights,'test');
-
+return;
 %best result for test_list 
+weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
+net=caffe.Net(cnnModel,weights,'test');
 draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10);
 legend_name={legend_name{:},'ours-tuning'};
 
+%for data_augment_without_tuning
+weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/data_augment_without_tuning/rnet__iter_75000.caffemodel';
+net=caffe.Net(cnnModel,weights,'test');
+draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10)
+legend_name={legend_name{:},'ours-tuning-augment-without-tuning'};
+
+%for  data_augment
+weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/centerloss_data_augment/rnet__iter_310000.caffemodel';
+net=caffe.Net(cnnModel,weights,'test');
+draw_roc('/home/scw4750/github/r_net/one_dir/',test_list,net,10)
+legend_name={legend_name{:},'ours-tuning-augment'};
+
+legend(legen_name);
+return ;
 % % weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/zhao_softmax_with_low_interval_caffemodel/rnet__iter_8000.caffemodel';
 % weights='/home/scw4750/github/unrolling/zero/Lightencnn/unroll_frontal_data_fine_tuning/snapshot/centerloss_data_augment/rnet__iter_310000.caffemodel';
 % net=caffe.Net(cnnModel,weights,'test');
