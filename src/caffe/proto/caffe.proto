@@ -407,6 +407,7 @@ message LayerParameter {
   optional TileParameter tile_param = 138;
   optional WindowDataParameter window_data_param = 129;
   optional UnrollingParameter unrolling_param=147;
+  optional FrontalParameter frontal_param=150;
   optional Weight_pmParameter weight_pm_param=148;
   optional CenterLossParameter center_loss_param = 149;
 }
@@ -931,6 +932,24 @@ message UnrollingParameter{
   optional bool is_gray=15 [default=true];
   optional bool has_processed=16 [default=true];
 }
+message FrontalParameter{
+  optional uint32 frontal_h=3 [default=512];
+  optional uint32 frontal_w=4 [default=512];
+  optional string mean_shape=5;
+  optional string shape_basis=6;
+  optional string mean_exp=7;
+  optional string exp_basis=8;
+  optional string para_std=9;
+  optional string para_mean=10;
+  optional string part_index=17;
+  optional string shape_basis_index=18;
+  optional string mean_lm2=19;
+  optional uint32 test_type=11 [default=0];
+  optional uint32 vertices_num=12 [default=159645];
+  optional string tvi=13;
+  optional bool is_gray=15 [default=true];
+  optional bool has_processed=16 [default=true];
+}
 message Weight_pmParameter{
   optional string mean_shape=5;
   optional string shape_basis=6;
@@ -1283,6 +1302,7 @@ message V1LayerParameter {
     WINDOW_DATA = 24;
     THRESHOLD = 31;
     UNROLLING = 45;
+    FRONTAL =47;
     WEIGHT_PMLOSS = 46;
   }
   optional LayerType type = 5;
@@ -1328,6 +1348,7 @@ message V1LayerParameter {
   optional LossParameter loss_param = 42;
   optional V0LayerParameter layer = 1;
   optional UnrollingParameter unroling_param=50;
+  optional FrontalParameter frontal_param=52;
   optional Weight_pmParameter weight_pm_param=51;
 }
 

@@ -128,7 +128,7 @@ namespace caffe {
             cublasSetVector(merged_mat.rows*228,sizeof(float),merged_mat.ptr(),1,d_a,1);
         }
 
-
+/*
     template<typename Dtype>
         void UnrollingLayer<Dtype>::weight_pca_pm(){
             cv::Mat temp_mean_shape=mean_shape+mean_exp;
@@ -161,7 +161,9 @@ namespace caffe {
                 //std::cout << "changed" << exp_basis.at<Dtype>(100,i_exba) << std::endl;;
             }
         }
+        */
     template<typename Dtype>
+    
         void UnrollingLayer<Dtype>::compute_alpha_beta_triangular_index(){
             alpha=cv::Mat(isomap_h,isomap_w,CV_32FC1);
             beta=cv::Mat(isomap_h,isomap_w,CV_32FC1);
@@ -377,7 +379,7 @@ namespace caffe {
                 cv::Mat true_vertex3d;
                 true_vertex3d=mean_sum_shape.clone();
                 true_vertex3d+=merged_mat*es_theta;
-                int ver_count=0;
+//                int ver_count=0;
                 /*
                    for(int i=0;i<vertices_num/3;i++){
                    if((mat_shape_exp.at<Dtype>(i,0)-h_c[i])>10){

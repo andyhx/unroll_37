@@ -1,14 +1,14 @@
 name: "3DRecon"
 input: "data"
-input_dim: 40
 input_dim: 1
-input_dim: 100
-input_dim: 100
-input: "para"
-input_dim:40
+input_dim: 1
+input_dim: 128
+input_dim: 128
+input: "true_frontal"
 input_dim:1
 input_dim:1
-input_dim:236  
+input_dim:128
+input_dim:128 
 layer {
   name: "conv11"
   type: "Convolution"
@@ -518,21 +518,43 @@ layer{
   type: "Silence"
   bottom: "fc6_tex"
 }
-layer{
-  name:"concat"
+
+###A_net####
+###R_net 1####
+layer {
+  name: "frontal"
+  type: "Frontal"
+  bottom: "image"
   bottom: "fc6_shape"
   bottom: "fc6_exp"
   bottom: "fc6_m"
-  top: "out"
-  type: "Concat"
-  concat_param{
-    axis:1
+  top: "frontal"
+  propagate_down : 0
+  propagate_down : 1
+  propagate_down : 1
+  propagate_down : 1
+  frontal_param {
+    frontal_h: 128
+    frontal_w: 128
+    mean_shape: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_shape.txt"
+    shape_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
+    mean_exp: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_exp.txt"
+    exp_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/exp_basis.txt"
+    para_std: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
+    para_mean: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
+    tvi:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_face.txt"
+    part_index: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_index.txt"
+    mean_lm2:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_lm2.txt" 
+    shape_basis_index:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/shape_basis_index.txt"
+    vertices_num:159645
+    is_gray: true
+    has_processed: true
   }
 }
 layer{
   name:"loss"
-  bottom: "out"
-  bottom: "para"
+  bottom: "true_frontal"
+  bottom: "frontal"
   type: "EuclideanLoss"
   top:"loss"
 }

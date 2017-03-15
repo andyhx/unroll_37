@@ -1,0 +1,27 @@
+# The train/test net protocol buffer definition
+net: "/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/train_test/prototxt/a_net_euc_loss_for_300w.prototxt"
+test_iter: 1000
+
+# Carry out testing every 1000 training iterations.
+test_interval: 1000
+
+# The base learning rate, momentum and the weight decay of the network.
+base_lr: 0.00005
+momentum: 0.9
+weight_decay: 0.005
+lr_policy: "inv"
+gamma: 0.0001
+power: 0.5
+
+# Display every 100 iterations
+display: 20
+
+# The maximum number of iterations
+max_iter: 15000000
+
+# snapshot intermediate results
+snapshot: 200
+snapshot_prefix: "/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/train_test/snapshot/frontal"
+
+# solver mode: CPU or GPU
+# solver_mode: GPU

@@ -1,0 +1,51 @@
+name: "unrolling_layer"
+input: "image"
+input_dim: 1
+input_dim: 1
+input_dim: 100
+input_dim: 100
+input: "pid"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 199
+input: "pexp"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 29
+input: "pm"
+input_dim: 1
+input_dim: 1
+input_dim: 1
+input_dim: 8
+layer {
+  name: "frontal"
+  type: "Frontal"
+  bottom: "image"
+  bottom: "pid"
+  bottom: "pexp"
+  bottom: "pm"
+  top: "frontal"
+  propagate_down : 0
+  propagate_down : 1
+  propagate_down : 1
+  propagate_down : 1
+  frontal_param {
+    frontal_h: 128
+    frontal_w: 128
+    mean_shape: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_shape.txt"
+    shape_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
+    mean_exp: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_exp.txt"
+    exp_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/exp_basis.txt"
+    para_std: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
+    para_mean: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
+    tvi:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_face.txt"
+    part_index: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_index.txt"
+    mean_lm2:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_lm2.txt" 
+    shape_basis_index:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/shape_basis_index.txt"
+    vertices_num:159645
+    is_gray: true
+    has_processed: true
+  }
+}
