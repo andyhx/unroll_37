@@ -666,7 +666,7 @@ namespace caffe {
                 const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 
             if(propagate_down[1]==true){
-                debug=true;
+                debug=false;
                 /*
                    int write_temp_variable=false;
 
