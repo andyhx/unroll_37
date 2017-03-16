@@ -1,23 +1,9 @@
 name: "unrolling_face_recognition_train_net"
-
-layer{
-  name: "probe"
-  type: "Data"
-  top: "probe"
-  top: "probe_label"
-  data_param{
-    source:"/home/brl/github/unrolling/zero/A_Rnet/same_one_lmdb/unrolling_probe_lmdb"
-    backend: LMDB
-    batch_size: 40
-  }
-  transform_param{
-    scale:0.007842 	
-    mean_value:127.5
-  }
-}
-
-
-###A_net####
+input:"probe"
+input_dim:1
+input_dim:1
+input_dim:100
+input_dim:100
 
 layer {
   name: "conv11"
@@ -533,46 +519,37 @@ layer{
 ###A_net####
 ###R_net 1####
 layer {
-  name: "unrolling"
-  type: "Unrolling"
+  name: "frontal"
+  type: "Frontal"
   bottom: "probe"
   bottom: "fc6_shape"
   bottom: "fc6_exp"
   bottom: "fc6_m"
-  top: "unrolling"
+  top: "frontal"
   propagate_down : 0
   propagate_down : 1
   propagate_down : 1
   propagate_down : 1
-  unrolling_param {
-    isomap_h: 128
-    isomap_w: 128
-    mean_shape: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_shape.txt"
-    shape_basis: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
-    mean_exp: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_exp.txt"
-    exp_basis: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/exp_basis.txt"
-    para_std: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
-    para_mean: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
-    tvi: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/tvi.txt"
-    texcoord: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/texcoord.txt"
-    #para_std: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
-    #para_mean: "/home/brl/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
+  frontal_param {
+    frontal_h: 128
+    frontal_w: 128
+    mean_shape: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_shape.txt"
+    shape_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/model_shape/shape_basis_0"
+    mean_exp: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_exp.txt"
+    exp_basis: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/exp_basis.txt"
+    para_std: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_std.txt"
+    para_mean: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/para_mean.txt"
+    tvi:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_face.txt"
+    part_index: "/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/part_index.txt"
+    mean_lm2:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/mean_lm2.txt" 
+    shape_basis_index:"/home/scw4750/github/unrolling/zero/test_unrolling_layer/Model_txt/shape_basis_index.txt"
     vertices_num:159645
     is_gray: true
     has_processed: true
   }
 }
 
-layer {
-  name: "concat_gallery_unrolling"
-  type: "Concat"
-  bottom: "gallery"
-  bottom: "unrolling"
-  concat_param{
-    concat_dim:0
-  }
-  top: "concat_gallery_unrolling"
-}
+
 layer{
   name: "conv1"
   type: "Convolution"
@@ -595,7 +572,7 @@ layer{
 	  value: 0.1
 	}
   }
-  bottom: "concat_gallery_unrolling"
+  bottom: "frontal"
   top: "conv1_1"
 }
 layer{
@@ -1078,58 +1055,8 @@ layer{
 	operation: MAX
   }
 }
-
 layer{
-  name: "fc2"
-  type: "InnerProduct"
-
-  inner_product_param{
-	num_output: 3838
-	weight_filler {
-	  type: "xavier"
-	}
-	bias_filler {
-	  type: "constant"
-	  value: 0.1
-	}	
-  }
-  bottom: "eltwise_fc1"
-  top: "fc2"
-}
-
-
-layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "fc2"
-  bottom: "image_label"
-  include: { phase: TRAIN }
-  top: "loss" 
-}
-layer {
-  name: "center_loss"
-  type: "CenterLoss"
-  bottom: "eltwise_fc1"
-  bottom: "image_label"
-  top: "center_loss"
-  include: { phase: TRAIN }
-  param {
-    lr_mult: 1
-    decay_mult: 2 
-  }
-  center_loss_param {
-    num_output: 3835
-    center_filler {
-      type: "xavier"
-    }
-  }
-  loss_weight: 0.008
-}
-layer {
-  name: "accuracy"
-  type: "Accuracy"
-  bottom: "fc2"
-  bottom: "probe_label"
-  top: "accuracy"
-  include: { phase: TEST }
+  name:"sil"
+  type:"Silence"
+  bottom:"eltwise_fc1"
 }

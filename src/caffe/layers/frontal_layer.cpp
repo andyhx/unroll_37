@@ -834,9 +834,7 @@ namespace caffe {
                                     //if(abs(dV[top[0]->offset(i_num, j, i_h, i_w)])<0.0000001) zero_count++;
                                     dpx = delta_dpx;
                                     dpy = delta_dpy;
-                                    //std::cout << "alpha" << alpha.data_at(i_num,0,i_h,i_w) << " beta" << beta.data_at(i_num,0,i_h,i_w);
-                                    //all_dpx.at<Dtype>(i_h,i_w)=dpx;
-                                    //all_dpy.at<Dtype>(i_h,i_w)=dpy;
+
                                     Dtype d_w_x_d_ui=(1-alpha.data_at(i_num,0,i_h,i_w)-beta.data_at(i_num,0,i_h,i_w));
                                     //Dtype d_w_y_d_ui=0;
                                     Dtype d_w_x_d_uj=alpha.data_at(i_num,0,i_h,i_w);
@@ -1232,7 +1230,7 @@ namespace caffe {
             for (auto&& r : results) {
                 r.get();
             }
-            //cv::imshow("frontal_in_c++",frontal);
+            //cv::imshow("frontal_in_c++",frontal_img);
             //cv::waitKey(0);
             //frontal=interpolate_black_line(frontal);
             //cv::imwrite(output_dir+"/"+std::to_string(count_num)+"frontal.png", frontal_img);

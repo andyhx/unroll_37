@@ -6,7 +6,7 @@ net: "/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/train_test/prot
 #test_interval: 1000
 
 # The base learning rate, momentum and the weight decay of the network.
-base_lr: 0.00005
+base_lr: 0.0000005
 momentum: 0.9
 weight_decay: 0.005
 lr_policy: "fixed"

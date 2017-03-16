@@ -8,7 +8,7 @@ import os
 os.chdir(caffe_root)
 import sys
 sys.path.insert(0, 'python')
-
+	
 import caffe
 caffe.set_device(1)
 caffe.set_mode_gpu()
@@ -17,8 +17,9 @@ from google.protobuf import text_format
 from caffe.proto import caffe_pb2
 
 #load net and do preproccessing
-model_weights = '/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/frontal_layer/frontal.caffemodel'
-model_def='/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/frontal_layer/deploy_test_backward.prototxt'
+#model_weights = '/home/scw4750/github/unrolling/zero/A_Rnet/A_Rnet_freeze_r_with_sofmax/snapshot/a_rnet_iter_3500.caffemodel'
+model_weights='/home/scw4750/github/unrolling/zero/A_net/a_net_iter_183000.caffemodel'
+model_def='/home/scw4750/github/unrolling/zero/A_Rnet/A_Rnet_freeze_r_with_sofmax/A_Rnet_deploy.prototxt'
 net = caffe.Net(model_def,      # defines the structure of the model
                 model_weights,  # contains the trained weights
                 caffe.TEST)     # use test mode (e.g., don't perform dropout)
@@ -58,16 +59,13 @@ for index in range(80000,data_len):
 		#print f[name_data[index,0]][:].transpose()[0]
 		name=''.join([chr(i) for i in f[name_data[index,0]][:].transpose()[0]])+'.jpg'
 
-		#cv2.imwrite("/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/frontal_layer/data/test_img"+os.path.sep+name,frame)
 		para=f[para_data[index,0]][:].transpose()[0]
 
 		#print name
 		frame=(frame-127.5)/128
 		#frame=frame.transpose((2,0,1))
-		net.blobs['image'].data[0,:] = frame
-		net.blobs['pid'].data[0,:] = para[0:199]
-		net.blobs['pexp'].data[0,:] = para[199:228]
-        	net.blobs['pm'].data[0,:] = para[228:236]
+		net.blobs['probe'].data[0,:] = frame
+
 
 		#net.forward()
 		net.forward()	
@@ -75,12 +73,9 @@ for index in range(80000,data_len):
 		isomap =net.blobs['frontal'].data[0,:]*255.0;
 
 		new_isomap = isomap.transpose((1,2,0)).astype(np.uint8)
-		#cv2.imwrite('/home/brl/result.jpg',new_isomap)
-		#print isomap.shape
-		net.backward();
-		#cv2.imshow("isomap1",new_isomap)
-		#cv2.waitKey(10)
-		cv2.imwrite("/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/frontal_layer/data/test_true_frontal"+os.path.sep+name,new_isomap)
+		cv2.imshow("isomap1",new_isomap)
+		cv2.waitKey(10)
+		cv2.imwrite("/home/scw4750/github/unrolling/zero/A_net/A_net_by_frontal/frontal_layer/data/temp1"+os.path.sep+name,new_isomap)
 
 
 
